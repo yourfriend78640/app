@@ -254,6 +254,10 @@ var annualIncome=x * 12;
 //alert(annualIncome);
 document.getElementById("annualIncome").innerHTML=annualIncome+" Rupees";
 
+if(annualIncome<=0){
+   alert('Wrong Input');
+   }
+    
 if(annualIncome<400000){
 //alert('no tax applied');
 taxRate=0;
