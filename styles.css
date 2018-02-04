@@ -94,7 +94,7 @@ background:rgb(10,10,10);
 }
 
 #taxAmount{
-color:red;
+text-decoration:underline;
 }
 
 *:focus{
