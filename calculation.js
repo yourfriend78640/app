@@ -11,7 +11,6 @@ var incomeAfterTax;
 function calculate(){
 var x=document.getElementById("income").value;
 var annualIncome=x * 12;
-document.getElementById("annualIncome").innerHTML=annualIncome+" Rupees";
 
 if(annualIncome<=0){
    alert('Enter correct income');
@@ -137,6 +136,7 @@ taxAmount=taxAmount+" Rupees";
 }
 
 /*Displaying Result*/
+document.getElementById("annualIncome").innerHTML=annualIncome+" Rupees";
 document.getElementById("taxRate").innerHTML=taxRate+" %";
 document.getElementById("slabLevel").innerHTML=slabLevel;
 document.getElementById("taxAmount").innerHTML=taxAmount;
