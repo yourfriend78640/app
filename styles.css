@@ -1,0 +1,151 @@
+html{
+height:100%;
+}
+
+body{
+margin:0;
+height:100%;
+box-sizing:border-box;
+}
+
+#container{
+
+overflow:auto;
+height:100%;
+background-image:url(http://austibooks.com.au/wp-content/uploads/2016/02/accounting-degree-tools-one-1800x900.jpg);
+background-repeat:no-repeat;
+background-size:cover;
+background-position:45%;
+
+}
+
+#main{
+    
+height:auto;
+width:48%;
+margin:10% auto;
+background:rgb(60,60,60);
+opacity:0.9;
+border-radius:10px;
+padding:1%;
+    
+}
+
+h1{
+font-family:garamond;
+color:white;
+letter-spacing:1px;
+
+}
+
+form{
+width:93%;
+margin:0 auto;
+height:100%;
+color:white;
+}
+
+input[type=number]{
+width:48%;
+padding:1%;
+}
+
+label{
+display:inline-block;
+width:49%;
+vertical-align:top;
+font-size:1.1em;
+font-weight:bold;
+}
+
+.formElement{
+margin:5% 0;
+border-bottom:1px solid black;
+}
+
+span{
+font-size:1.1em;
+margin-left:1%;
+}
+
+.values{
+visibility:hidden;
+}
+
+#calculate{
+text-align:center;
+padding:5%;
+}
+
+input[type=submit]{
+width:100%;
+height:50px;
+background:rgb(21,21,21);
+border:0;
+color:white;
+opacity:1;
+font-weight:bold;
+font-size:18px;
+}
+
+input[type=submit]:hover{
+color:white;
+background:rgb(10,10,10);
+}
+
+#taxAmount{
+color:red;
+}
+
+*:focus{
+outline:none;
+}
+
+/*RESPONSIVENESS*/
+
+@media screen and (max-width: 880px) {
+#main{
+width:78%;
+}
+
+}
+@media screen and (max-width: 545px) {
+#main{
+width:90%;
+background:linear-gradient(to top, rgb(60,60,60) 0%, rgb(200,200,200) 100%);
+}
+
+h1{
+color:black;
+text-transform:uppercase;
+}
+
+.values,#income{
+display:block;
+margin:0 auto;
+}
+.formElement,#income{
+text-align:center;
+}
+
+label{
+text-decoration:underline;
+color:black;
+font-weight:bold;
+margin:1% 0;
+}
+
+
+}
+
+.formElement{
+display:none;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+} 
