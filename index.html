@@ -1,0 +1,404 @@
+<!DOCtype html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tax Calculator</title>
+<style>
+html{
+height:100%;
+//min-height:100%;
+
+//border:1px solid blue;
+//box-sizing:border-box;
+}
+
+body{
+//border:3px solid green;
+margin:0;
+height:100%;
+
+box-sizing:border-box;
+}
+
+
+#container{
+//border:1px solid red;
+overflow:hidden;
+height:100%;
+
+//width:100%;
+//background-image:url(http://invictusnews.com/wp-content/uploads/2017/07/online-accounting-courses.jpg);
+background-image:url(http://austibooks.com.au/wp-content/uploads/2016/02/accounting-degree-tools-one-1800x900.jpg);
+
+background-repeat:no-repeat;
+background-size:cover;
+background-position:45%;
+
+
+}
+
+#main{
+//border:1px solid black;
+height:auto;
+width:48%;
+margin:10% auto;
+background:rgb(60,60,60);
+//background:linear-gradient(to top, rgb(60,60,60) 0%, rgb(200,200,200) 100%);
+opacity:0.9;
+border-radius:10px;
+padding:1%;
+
+}
+
+h1{
+font-family:garamond;
+color:white;
+letter-spacing:1px;
+
+}
+
+form{
+//border:1px solid red;
+width:93%;
+margin:0 auto;
+height:100%;
+color:white;
+}
+
+input[type=text]{
+width:48%;
+//margin:5%;
+padding:1%;
+//height:25px;
+}
+
+label{
+display:inline-block;
+//margin-right:1%;
+//border:1px solid green;
+width:49%;
+vertical-align:top;
+font-size:1.1em;
+font-weight:bold;
+}
+
+.formElement{
+margin:5% 0;
+border-bottom:1px solid black;
+
+}
+
+span{
+//border:1px solid purple;
+font-size:1.1em;
+margin-left:1%;
+}
+
+.values{
+visibility:hidden;
+}
+
+#calculate{
+text-align:center;
+padding:5%;
+}
+
+input[type=submit]{
+width:100%;
+height:50px;
+background:rgb(21,21,21);
+//background:black;
+border:0;
+color:white;
+opacity:1;
+font-weight:bold;
+font-size:18px;
+}
+
+input[type=submit]:hover{
+color:white;
+background:rgb(10,10,10);
+}
+
+#taxAmount{
+color:red;
+}
+
+*:focus{
+outline:none;
+}
+
+/*RESPONSIVENESS*/
+
+@media screen and (max-width: 880px) {
+#main{
+width:78%;
+}
+
+}
+@media screen and (max-width: 545px) {
+#main{
+width:90%;
+background:linear-gradient(to top, rgb(60,60,60) 0%, rgb(200,200,200) 100%);
+}
+
+h1{
+color:black;
+text-transform:uppercase;
+}
+
+.values,#income{
+display:block;
+margin:0 auto;
+}
+.formElement,#income{
+text-align:center;
+}
+
+label{
+text-decoration:underline;
+color:black;
+font-weight:bold;
+margin:1% 0;
+}
+
+
+}
+
+.formElement{
+display:none;
+}
+
+</style>
+</head>
+
+<body>
+<div id="container">
+<div id="main">
+<h1 align="center">Tax Calculator</h1>
+<form action="index.html" method="post">
+<div class="formElement" style="display:block; border:0;"><label for="income" style="font-weight:normal;">Monthly Income (Rupees)</label><input type="text" id="income" placeholder="Enter Monthly Income" name="income" maxlength="11" required></div>
+<div class="formElement"><label for="annualIncome">Annual Income</label><span id="annualIncome" class="values">value1</span></div>
+<div class="formElement"><label for="slabLevel">Slab Level</label><span id="slabLevel" class="values">value2</span> </div>
+<div class="formElement"><label for="taxRate">Tax Rate Applied</label><span id="taxRate" class="values">value3</span> </div>
+<div class="formElement"><label for="taxAmount">Tax Amount</label><span id="taxAmount" class="values">value4</span> </div>
+<div class="formElement"><label for="incomeAfterTax">Income after Tax</label><span id="incomeAfterTax" class="values">value5</span> </div>
+<div class="formElement"  style="display:block; border:0" id="calculate"><input type="submit" value="CALCULATE" onclick="calculate();return false;"></div>
+
+</form>
+
+</div>
+
+</div>
+<script>
+var taxRate;
+var taxAmount;
+var baseTax;
+var taxableAmount;
+var slabLevel;
+var incomeAfterTax;
+
+/*Input validation*/
+
+document.getElementById('income').onkeydown = function(e)
+ {
+     console.log(e.key);
+     //console.log(e.target.value);
+     switch (e.key)
+     {
+         case "1":
+         case "2":
+         case "3":
+         case "4":
+         case "5":
+         case "6":
+         case "7":
+         case "8":
+         case "9":
+         case "0":
+         case "Backspace":
+         case "Enter":
+             return true;
+             break;
+
+         case ".":
+             if (e.target.value.indexOf(".") == -1)
+             {
+                 return true;
+             }
+             else
+             {
+                 return false;
+             }
+             break;
+
+         default:
+             return false;
+     }
+
+ }
+
+/*Actual Function*/
+
+function calculate(){
+var x=document.getElementById("income").value;
+//alert(x);
+var annualIncome=x * 12;
+//alert(annualIncome);
+document.getElementById("annualIncome").innerHTML=annualIncome+" Rupees";
+
+if(annualIncome<400000){
+//alert('no tax applied');
+taxRate=0;
+taxAmount="No Tax Applied";
+slabLevel="Below 4 Lakh Rupees";
+incomeAfterTax=annualIncome;
+}
+
+else if((annualIncome>400000)&&(annualIncome<500000)){
+
+taxableAmount=annualIncome-400000;
+taxAmount=taxableAmount*.02;
+incomeAfterTax=annualIncome-taxAmount;
+baseTax=0;
+//alert('400000-500000');
+slabLevel="400000-500000 Rupees";
+taxRate=2;
+taxAmount=taxAmount+" Rupees";
+}
+
+else if((annualIncome>500000)&&(annualIncome<750000)){
+baseTax=2000;
+taxableAmount=annualIncome-500000;
+taxAmount=baseTax+taxableAmount*.05;
+incomeAfterTax=annualIncome-taxAmount;
+//alert('Got it');
+slabLevel="500000-750000 Rupees";
+taxRate="2000 Rupees + 5";
+taxAmount=taxAmount+" Rupees";
+}
+
+else if((annualIncome>750000)&&(annualIncome<1400000)){
+baseTax=14500;
+taxableAmount=annualIncome-750000;
+taxAmount=baseTax+taxableAmount*.10;
+incomeAfterTax=annualIncome-taxAmount;
+//alert('750000-1400000');
+slabLevel="750000-1400000 Rupees";
+taxRate="14500 Rupees + 10";
+taxAmount=taxAmount+" Rupees";
+}
+
+else if((annualIncome>1400000)&&(annualIncome<1500000)){
+baseTax=79500;
+taxableAmount=annualIncome-1400000;
+taxAmount=baseTax+taxableAmount*.125;
+incomeAfterTax=annualIncome-taxAmount;
+//alert('1400000-1500000');
+slabLevel="1400000-1500000 Rupees";
+taxRate="79500 Rupees + 12.5";
+taxAmount=taxAmount+" Rupees";
+}
+
+else if((annualIncome>1500000)&&(annualIncome<1800000)){
+baseTax=92000;
+taxableAmount=annualIncome-1500000;
+taxAmount=baseTax+taxableAmount*.15;
+incomeAfterTax=annualIncome-taxAmount;
+//alert('1500000-1800000');
+slabLevel="1500000-1800000 Rupees";
+taxRate="92000 Rupees + 15";
+taxAmount=taxAmount+" Rupees";
+}
+
+else if((annualIncome>1800000)&&(annualIncome<2500000)){
+baseTax=137000;
+taxableAmount=annualIncome-1800000;
+taxAmount=baseTax+taxableAmount*.175;
+incomeAfterTax=annualIncome-taxAmount;
+//alert('1800000-2500000');
+slabLevel="1800000-2500000 Rupees";
+taxRate="137000 Rupees + 17.5";
+taxAmount=taxAmount+" Rupees";
+}
+
+else if((annualIncome>2500000)&&(annualIncome<3000000)){
+baseTax=259500;
+taxableAmount=annualIncome-2500000;
+taxAmount=baseTax+taxableAmount*.20;
+incomeAfterTax=annualIncome-taxAmount;
+//alert('2500000-3000000');
+slabLevel="2500000-3000000 Rupees";
+taxRate="259500 Rupees + 20";
+taxAmount=taxAmount+" Rupees";
+}
+
+else if((annualIncome>3000000)&&(annualIncome<3500000)){
+baseTax=359500;
+taxableAmount=annualIncome-3000000;
+taxAmount=baseTax+taxableAmount*.225;
+incomeAfterTax=annualIncome-taxAmount;
+//alert('3000000-3500000');
+slabLevel="3000000-3500000 Rupees";
+taxRate="359500 Rupees + 22.5";
+taxAmount=taxAmount+" Rupees";
+}
+
+else if((annualIncome>3500000)&&(annualIncome<4000000)){
+baseTax=472000;
+taxableAmount=annualIncome-3500000;
+taxAmount=baseTax+taxableAmount*.25;
+incomeAfterTax=annualIncome-taxAmount;
+//alert('3500000-4000000');
+slabLevel="3500000-4000000 Rupees";
+taxRate="472000 Rupees + 25";
+taxAmount=taxAmount+" Rupees";
+}
+
+else if((annualIncome>4000000)&&(annualIncome<7000000)){
+baseTax=597000;
+taxableAmount=annualIncome-4000000;
+taxAmount=baseTax+taxableAmount*.275;
+incomeAfterTax=annualIncome-taxAmount;
+//alert('4000000-7000000');
+slabLevel="4000000-7000000 Rupees";
+taxRate="597000 Rupees + 27.5";
+taxAmount=taxAmount+" Rupees";
+}
+
+if(annualIncome>7000000){
+baseTax=1422000;
+taxableAmount=annualIncome-7000000;
+taxAmount=baseTax+taxableAmount*.30;
+incomeAfterTax=annualIncome-taxAmount;
+//alert('7000000-');
+slabLevel="Above 70 Lakh Rupees";
+taxRate="1422000 Rupees + 30";
+taxAmount=taxAmount+" Rupees";
+}
+
+/*Displaying Result*/
+document.getElementById("taxRate").innerHTML=taxRate+" %";
+document.getElementById("slabLevel").innerHTML=slabLevel;
+document.getElementById("taxAmount").innerHTML=taxAmount;
+document.getElementById("incomeAfterTax").innerHTML=incomeAfterTax+" Rupees";
+
+/*Making the elements Visible*/
+
+var elements = document.getElementsByClassName("values");
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].style.visibility="visible";
+
+    }
+
+var elements = document.getElementsByClassName("formElement");
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].style.display="block";
+
+    }
+
+}
+</script>
+
+</body>
+
+</html>
