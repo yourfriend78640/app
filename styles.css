@@ -142,6 +142,7 @@ margin:1% 0;
 display:none;
 }
 
+/*For Removing Input Spinner in input[text=number]*/
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
     -webkit-appearance: none;
@@ -149,3 +150,7 @@ input[type=number]::-webkit-outer-spin-button {
     appearance: none;
     margin: 0; 
 } 
+
+input[type=number] {
+-moz-appearance: textfield;
+}
