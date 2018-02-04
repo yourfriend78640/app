@@ -64,7 +64,7 @@ height:100%;
 color:white;
 }
 
-input[type=text]{
+input[type=number]{
 width:48%;
 //margin:5%;
 padding:1%;
@@ -168,15 +168,23 @@ margin:1% 0;
 display:none;
 }
 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+} 
+ 
 </style>
 </head>
 
 <body>
 <div id="container">
 <div id="main">
-<h1 align="center">Tax Calculator</h1>
+<h1 align="center">Tax Calculatorr</h1>
 <form action="index.html" method="post">
-<div class="formElement" style="display:block; border:0;"><label for="income" style="font-weight:normal;">Monthly Income (Rupees)</label><input type="text" id="income" placeholder="Enter Monthly Income" name="income" maxlength="11" required></div>
+<div class="formElement" style="display:block; border:0;"><label for="income" style="font-weight:normal;">Monthly Income (Rupees)</label><input type="number" id="income" placeholder="Enter Monthly Income" name="income" maxlength="11" required></div>
 <div class="formElement"><label for="annualIncome">Annual Income</label><span id="annualIncome" class="values">value1</span></div>
 <div class="formElement"><label for="slabLevel">Slab Level</label><span id="slabLevel" class="values">value2</span> </div>
 <div class="formElement"><label for="taxRate">Tax Rate Applied</label><span id="taxRate" class="values">value3</span> </div>
@@ -246,6 +254,11 @@ var annualIncome=x * 12;
 //alert(annualIncome);
 document.getElementById("annualIncome").innerHTML=annualIncome+" Rupees";
 
+if(annualIncome<=0){
+   alert('Wrong Input');
+    return false;
+   }
+    
 if(annualIncome<400000){
 //alert('no tax applied');
 taxRate=0;
