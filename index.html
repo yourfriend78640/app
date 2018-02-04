@@ -64,7 +64,7 @@ height:100%;
 color:white;
 }
 
-input[type=tel]{
+input[type=number]{
 width:48%;
 //margin:5%;
 padding:1%;
@@ -176,7 +176,7 @@ display:none;
 <div id="main">
 <h1 align="center">Tax Calculator</h1>
 <form action="index.html" method="post">
-<div class="formElement" style="display:block; border:0;"><label for="income" style="font-weight:normal;">Monthly Income (Rupees)</label><input type="tel" id="income" placeholder="Enter Monthly Income" name="income" maxlength="11" required></div>
+<div class="formElement" style="display:block; border:0;"><label for="income" style="font-weight:normal;">Monthly Income (Rupees)</label><input type="number" id="income" placeholder="Enter Monthly Income" name="income" maxlength="11" required></div>
 <div class="formElement"><label for="annualIncome">Annual Income</label><span id="annualIncome" class="values">value1</span></div>
 <div class="formElement"><label for="slabLevel">Slab Level</label><span id="slabLevel" class="values">value2</span> </div>
 <div class="formElement"><label for="taxRate">Tax Rate Applied</label><span id="taxRate" class="values">value3</span> </div>
